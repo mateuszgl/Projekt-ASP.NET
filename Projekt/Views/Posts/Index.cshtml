@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Projekt.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Posts</h2>
+
+@if (Projekt.DAL.CustomHelpers.isInRole(Projekt.Models.Person.Roles.Writer))
+{
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostWriter)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Reverse()) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostWriter.Nickname)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.PostID })
+        
+            @if (Projekt.DAL.CustomHelpers.isInRole(Projekt.Models.Person.Roles.Writer)) { 
+            
+                <span>|</span>
+                @Html.ActionLink("Edit", "Edit", new { id=item.PostID })<span>&nbsp;|</span>
+                @Html.ActionLink("Delete", "Delete", new { id=item.PostID })
+            }
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,64 @@
+﻿@model Projekt.Models.Post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Post details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostWriter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostWriter.Nickname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+        <dd>
+            <ul>
+            @foreach (var item in Model.Comments)
+            {
+                <li>@Html.DisplayFor(modelItem => item.CommentContent)<br/>
+                Dodane przez: @Html.DisplayFor(modelItem => item.CommentWriter.Nickname)
+                </li>
+                        
+            }
+            </ul>
+           
+        </dd>
+
+    </dl>
+</div>
+<p>
+@if (Projekt.DAL.CustomHelpers.isInRole(Projekt.Models.Person.Roles.Writer))
+{
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PostID })<span>&nbsp;|</span>
+}
+    
+    @Html.ActionLink("Comment","Comment", new { id = Model.PostID }) |
+    @Html.ActionLink("Back to List", "Index")
+
+</p>

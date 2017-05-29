@@ -1,0 +1,46 @@
+﻿@model Projekt.Models.Person
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Nickname:</dt>
+        <dd>@Html.DisplayFor(model => model.Nickname)</dd>
+
+        <dt>Email:</dt>
+        <dd>@Html.DisplayFor(model => model.Email)</dd>
+
+        <dt>Roleeeee:</dt>
+        <dd>@Html.DisplayFor(model => model.Role)</dd>
+        
+        <dt>Password:</dt>
+        <dd>
+           @Html.ActionLink("Change your password", "ChangePassword")
+            <p class="text-success">@ViewBag.Message</p>
+        </dd>
+
+        <dt>Posts:</dt>
+     </dl>
+    <table class="table">
+            @foreach (var item in Model.Posts.Reverse())
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "../Posts/Details", new { id = item.PostID })
+                        </td>
+                    </tr>
+
+                }
+        </table>
+           
+
+        
+</div>

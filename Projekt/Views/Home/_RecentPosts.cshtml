@@ -1,0 +1,23 @@
+﻿
+<h3>@ViewBag.Message</h3>
+
+<table class="table">
+   
+    @foreach (var item in ViewData["Recent"] as IQueryable<Projekt.Models.Post>)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostWriter.Nickname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments.Count)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "../Posts/Details", new { id = item.PostID })
+            </td>
+        </tr>
+    }
+    </table>
